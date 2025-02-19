@@ -1,28 +1,17 @@
-/*
- * CS 551 Project "Memory manager".
- * This file needs to be turned in.	
- */
-
-
 #include "memory_manager.h"
 
 static STRU_MEM_LIST * mem_pool = NULL;
 
-/*
- * Print out the current status of the memory manager.
- * Reading this function may help you understand how the memory manager organizes the memory.
- * Do not change the implementation of this function. It will be used to help the grading.
- */
 void mem_mngr_print_snapshot(void)
 {
     STRU_MEM_LIST * mem_list = NULL;
 
     printf("============== Memory snapshot ===============\n");
 
-    mem_list = mem_pool; // Get the first memory list
+    mem_list = mem_pool;
     while(NULL != mem_list)
     {
-        STRU_MEM_BATCH * mem_batch = mem_list->first_batch; // Get the first mem batch from the list 
+        STRU_MEM_BATCH * mem_batch = mem_list->first_batch;
 
         printf("mem_list %p slot_size %d batch_count %d free_slot_bitmap %p\n", 
                    mem_list, mem_list->slot_size, mem_list->batch_count, mem_list->free_slots_bitmap);
@@ -40,10 +29,6 @@ void mem_mngr_print_snapshot(void)
     printf("==============================================\n");
 }
 
-/*
- * Initialize the memory manager with 8 bytes slot size mem_list.
- * Initialize this list with 1 batch of slots.
- */
 void mem_mngr_init(void) {
     mem_pool = (STRU_MEM_LIST *)malloc(sizeof(STRU_MEM_LIST));
     if (!mem_pool) {
@@ -65,10 +50,6 @@ void mem_mngr_init(void) {
     printf("Memory manager initialized.\n");
 }
 
-/*
- * Clean up the memory manager (e.g., release all the memory allocated)
- */
-
 void mem_mngr_leave(void) {
     STRU_MEM_LIST *current_list = mem_pool;
     while (current_list) {
@@ -87,11 +68,6 @@ void mem_mngr_leave(void) {
     mem_pool = NULL;
     printf("Memory manager cleaned.\n");
 }
-/*
- * Allocate a chunk of memory 	
- * @param size: size in bytes to be allocated
- * @return: the pointer to the allocated memory slot
- */
 
 void * mem_mngr_alloc(size_t size) {
     if (size <= 0) return NULL;
@@ -146,12 +122,6 @@ void * mem_mngr_alloc(size_t size) {
 
     return NULL; 
 }
-
-/*
- * Free a chunk of memory pointed by ptr
- * Print out any error messages
- * @param: the pointer to the allocated memory slot
- */
 
 void mem_mngr_free(void *ptr) {
     if (!ptr) {
