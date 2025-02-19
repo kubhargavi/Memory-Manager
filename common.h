@@ -1,8 +1,3 @@
-/*
- * CS 551 Project "Memory manager".
- * This file needs to be turned in.	
- */
-
 #ifndef __COMMON_H__
 #define __COMMON_H__
 
@@ -23,4 +18,4 @@ int bitmap_clear_bit(unsigned char * bitmap, int size, int target_pos);
 int bitmap_bit_is_set(unsigned char * bitmap, int size, int pos);
 int bitmap_print_bitmap(unsigned char * bitmap, int size);
 
-#endif //__COMMON_H__
+#endif 
